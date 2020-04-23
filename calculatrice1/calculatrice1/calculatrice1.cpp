@@ -30,7 +30,7 @@ int main()
 
 	if (userChoice == "calculus")
 	{
-		resultat = calculus();
+		resultat = GiveResultToDesiredOperation();
 	}
 
 	if (userChoice == "sinus")

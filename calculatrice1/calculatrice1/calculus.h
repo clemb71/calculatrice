@@ -5,6 +5,7 @@
 Its input are the numbers to be operated
 The output is the result of the operation */
 
-double calculus();
+double GiveResultToDesiredOperation();
 
 #endif // MATH_H_INCLUDED
+
