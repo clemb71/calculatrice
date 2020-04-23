@@ -24,23 +24,23 @@ int main()
 	char operationType;
 	string userChoice;
 
-	cout << "Warning! modulo operation takes operands closest interger rounded down. Make sure you have the integers you want for the operation" << endl;
+	/*cout << "Warning! modulo operation takes operands closest interger rounded down. Make sure you have the integers you want for the operation" << endl;
 	cout << "Choose your operation: calculus, sinus, cosinus,tangent, square root, exponential, neperian logarithm, base ten logarithm, absolute," << endl;
-	cin >> userChoice;
+	cin >> userChoice;*/
 
-	if (userChoice == "calculus")
+	//if (userChoice == "calculus")
 	{
 		resultat = GiveResultToDesiredOperation();
 	}
 
-	if (userChoice == "sinus")
-	{
-		cout << "Sinus Operand :" << endl; //Asks to enter the first number of the operation
-		cin >> firstOperand;
-		cin.ignore();
+	//if (userChoice == "sinus")
+	//{
+	//	cout << "Sinus Operand :" << endl; //Asks to enter the first number of the operation
+	//	cin >> firstOperand;
+	//	cin.ignore();
 
-		resultat = sin(firstOperand*M_PI/180);
-	}
+	//	resultat = sin(firstOperand*M_PI/180);
+	//}
 
 	std::cout << "resultat :" << resultat << endl; //prints the operation result
 	return 0;

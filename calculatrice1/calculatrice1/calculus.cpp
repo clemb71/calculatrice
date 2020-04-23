@@ -22,70 +22,64 @@ std::string AskToWriteOperation()
 	return operation;
 }
 
-
-
-double Calculus(std::string operation)
+double PriorityOp(std::string operation)
 {
-	double resultat(0); // result of operation
-	double firstOperand, secondOperand; //operands for the calculation
+	std::regex sousOperation("[\\(](.*)[\\)]");
+	std::smatch matches;
+	double resultat;
 	
 
-	std::regex operationRegex("(\\d*\\.?\\d+)([\\+\\-\\/\\*])(\\d*\\.?\\d+)");
-	std::smatch matches;
-
-	if (std::regex_search(operation, matches, operationRegex)) 
+	if (std::regex_search(operation, matches, sousOperation))
 	{
-		firstOperand = std::stod(matches[1]);
-		secondOperand = std::stod(matches[3]);
-		std::string operation = matches[2];
+		resultat = PriorityOp(matches[1]) ;
+	}
+	else
+	{
+		double firstOperand, secondOperand; //operands for the calculation
+		
+		std::regex operationRegex("(\\d*\\.?\\d+)([\\+\\-\\/\\*])(\\d*\\.?\\d+)");
 
-		if (operation == "+")
+		if (std::regex_search(operation, matches, operationRegex))
 		{
-			resultat = firstOperand + secondOperand; // Does an addition
-		}
-		else if (operation == "-")
-		{
-			resultat = firstOperand - secondOperand; // Does a substraction
-		}
-		else if (operation == "*")
-		{
-			resultat = firstOperand * secondOperand; // Does a multiplication
-		}
-		else if (operation == "/")
-		{
-			resultat = firstOperand / secondOperand; // Does a division
-		}
-		else if (operation == "%")
-		{
-			resultat = int(firstOperand) % int(secondOperand); // Does a modulo with the closest rounded down integer
+			firstOperand = std::stod(matches[1]);
+			secondOperand = std::stod(matches[3]);
+			std::string operation = matches[2];
+			
+			if (operation == "+")
+			{
+				resultat = firstOperand + secondOperand; // Does an addition
+			}
+			else if (operation == "-")
+			{
+				resultat = firstOperand - secondOperand; // Does a substraction
+			}
+			else if (operation == "*")
+			{
+				resultat = firstOperand * secondOperand; // Does a multiplication
+			}
+			else if (operation == "/")
+			{
+				resultat = firstOperand / secondOperand; // Does a division
+			}
+			else if (operation == "%")
+			{
+				resultat = int(firstOperand) % int(secondOperand); // Does a modulo with the closest rounded down integer
+			}
+			else if (operation )
+			else
+			{
+				std::cout << "Incorrect operation type. Please try again" << std::endl;
+			}
+
+			resultat = PriorityOp(std::to_string(resultat) + matches.suffix().str());
 		}
 		else
 		{
 			std::cout << "Incorrect operation type. Please try again" << std::endl;
 		}
-	}
-	else
-	{
-		std::cout << "Incorrect operation type. Please try again" << std::endl;
+	
 	}
 	return resultat;
-}
-
-double PriorityOp(std::string operation)
-{
-	std::regex sousOperation("[\\(](.*)[\\)])");
-	std::smatch matches;
-	double sousResultat;
-	
-
-	if (std::regex_search(operation, matches, sousOperation))
-	{
-		sousResultat = PriorityOp(matches[1]) ;
-	}
-	else 
-		sousResultat = Calculus(operation);
-		
-	return sousResultat;
 }
 
 double GiveResultToDesiredOperation()
@@ -93,4 +87,5 @@ double GiveResultToDesiredOperation()
 	std::string desiredSousOperation = AskToWriteOperation();
 	double result = PriorityOp(desiredSousOperation);
 
+	return result;
 }
