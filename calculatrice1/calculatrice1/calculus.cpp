@@ -24,14 +24,16 @@ std::string AskToWriteOperation()
 
 double PriorityOp(std::string operation)
 {
-	std::regex sousOperation("[\\(](.*)[\\)]");
+	std::regex sousOperation("[\\(]([^\\(\\)]*)[\\)]");
 	std::smatch matches;
 	double resultat =0;
+
 	
 
 	if (std::regex_search(operation, matches, sousOperation))
 	{
-		resultat = PriorityOp(matches[1]) ;
+		resultat = PriorityOp(matches.prefix().str() + std::to_string(PriorityOp(matches[1]))+ matches.suffix().str()) ;
+
 	}
 	else
 	{
